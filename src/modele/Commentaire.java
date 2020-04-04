@@ -7,17 +7,18 @@ public class Commentaire {
 	int id;
 	String contenu;
 	Date date;
-	//Rencontre rencontre;
+	int idRencontre;
 
 	public Commentaire() {
 
 	}
 
-	public Commentaire(int id, String contenu, Date date) {
+	public Commentaire(int id, String contenu, Date date,int idRencontre) {
 		super();
 		this.id = id;
 		this.contenu = contenu;
 		this.date = date;
+		this.idRencontre = idRencontre;
 	}
 
 	public int getId() {
@@ -44,4 +45,12 @@ public class Commentaire {
 		this.date = date;
 	}
 
+	public int getIdRencontre() {
+		return idRencontre;
+	}
+
+	public void setIdRencontre(int idRencontre) {
+		this.idRencontre = idRencontre;
+	}
+	
 }

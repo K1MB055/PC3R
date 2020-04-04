@@ -9,12 +9,11 @@ import com.mysql.jdbc.Connection;
 
 public class TraitementUtilisateur {
 	
-	public static boolean AjouterUtilisateur(Utilisateur utilisateur) throws ClassNotFoundException, SQLException {
+	public static boolean ajouterUtilisateur(Utilisateur utilisateur) throws ClassNotFoundException, SQLException {
 		Connection cn = null;
 		PreparedStatement st = null;
 		String sql = "INSERT INTO user values (null,?,?,?,?)";
 		cn = ConnectionLV.getConnection();
-		System.out.println(cn);
 		st = cn.prepareStatement(sql);
 		st.setString(1, utilisateur.getNom());
 		st.setString(2, utilisateur.getPrenom());
@@ -24,7 +23,7 @@ public class TraitementUtilisateur {
 		return (count > 0);
 	}
 	
-	public static boolean SupprimerUtilisateur(String email) throws ClassNotFoundException, SQLException
+	public static boolean supprimerUtilisateur(String email) throws ClassNotFoundException, SQLException
 	{
 		Connection cn = null;
 		Statement st = null;
@@ -35,7 +34,7 @@ public class TraitementUtilisateur {
 		return (count > 0);
 	}
 	
-	public static boolean Authentification(String email, String mdp) throws ClassNotFoundException, SQLException {
+	public static boolean authentification(String email, String mdp) throws ClassNotFoundException, SQLException {
 		Connection cn = null;
 		PreparedStatement st = null;
 		String sql = "Select * from user where email= ? and password= ? ";
@@ -48,5 +47,14 @@ public class TraitementUtilisateur {
 	    return true;
 		}
 		return false;
+	}
+	
+	public static boolean getProfil(int id) throws ClassNotFoundException, SQLException {
+		String sql = "Select * from user where id= " + id;
+		return true;
+	}
+	
+	public static boolean modifierProfil(int id) throws ClassNotFoundException, SQLException {
+		return true;
 	}
 }

@@ -15,13 +15,12 @@ public class Rencontre {
 	int ScoreAwayTeam;
 	//ArrayList<String> arbitres;
 	
-	Rencontre (){
+	public Rencontre (){
 		
 	}
 	
 	public Rencontre(int id, String competition, String tour, Date date, String status, String homeTeam,
 			String awayTeam, int scoreHomeTeam, int scoreAwayTeam) {
-		super();
 		this.id = id;
 		this.competition = competition;
 		this.tour = tour;
