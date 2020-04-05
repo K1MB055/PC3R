@@ -23,6 +23,7 @@
 				</td>
 			</tr>
 		</table>
+		<input type="hidden" name="hidden" value="authentification" />
 	</form>
 	
 	<script type="text/javascript">
