@@ -1,7 +1,5 @@
 package modele;
 
-import java.util.ArrayList;
-
 public class Utilisateur {
 	
 	int id;
@@ -9,20 +7,17 @@ public class Utilisateur {
 	String prenom;
 	String email;
 	String mdp;
-	ArrayList<Commentaire> commentaires;
 
 	public Utilisateur (){
 	}
 	
-	public Utilisateur(int id, String nom, String prenom, String email, String mdp,
-			ArrayList<Commentaire> commentaires) {
+	public Utilisateur(int id, String nom, String prenom, String email, String mdp) {
 		super();
 		this.id = id;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.email = email;
 		this.mdp = mdp;
-		this.commentaires = commentaires;
 	}
 
 	public int getId() {
@@ -63,13 +58,5 @@ public class Utilisateur {
 
 	public void setMdp(String mdp) {
 		this.mdp = mdp;
-	}
-
-	public ArrayList<Commentaire> getCommentaires() {
-		return commentaires;
-	}
-	
-	public void setCommentaires(ArrayList<Commentaire> commentaires) {
-		this.commentaires = commentaires;
 	}
 }

@@ -1,6 +1,8 @@
 package modele;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -9,15 +11,15 @@ import com.mysql.jdbc.Connection;
 
 public class TraitementCommentaire {
 	
-	public static boolean ajouterCommentaire(Commentaire comm) throws ClassNotFoundException, SQLException {
+	public static boolean ajouterCommentaire(Commentaire commentaire) throws ClassNotFoundException, SQLException {
 		Connection cn = null;
 		PreparedStatement st = null;
 		String sql = "INSERT INTO comments values (null,?,?)";
 		cn = ConnectionLV.getConnection();
 		st = cn.prepareStatement(sql);
-		st.setString(1, comm.getContenu());
-		st.setDate(2, comm.getDate());
-		st.setInt(3, comm.getIdRencontre());
+		st.setString(1, commentaire.getContenu());
+		st.setDate(2, new java.sql.Date(commentaire.getDate().getTime()));
+		st.setInt(3, commentaire.getIdRencontre());
 		int count = st.executeUpdate();
 		return (count > 0);
 	}
@@ -34,18 +36,30 @@ public class TraitementCommentaire {
 	}
 	
 	//recupérer la liste de commentaire d'une recontre
-	public static ArrayList<Commentaire> getCommentaire(int idRencontre) throws ClassNotFoundException, SQLException
+	public static ArrayList<Commentaire> getListCommentaire(int idRencontre) throws ClassNotFoundException, SQLException
 	{
+		int idCommentaire = 0;
+		String contenu;
+		Date date;
+		//String pseudo = null;
+		ArrayList<Commentaire> list = new ArrayList<Commentaire>();
 		Connection cn = null;
 		Statement st = null;
-		String sql = "Select * from comments where id = " + idRencontre;
+		String sql = "Select * FROM comments	WHERE  idRencontre= " + idRencontre;
 		cn = ConnectionLV.getConnection();
 		st = cn.createStatement();
-		//...
-		return null;
+		ResultSet rs = st.executeQuery(sql);
+		while (rs.next()) {
+			idCommentaire = rs.getInt("id");
+			//pseudo = rs.getString("pseudo_user");
+			contenu = rs.getString("contenu");
+			date = rs.getDate("date");
+			list.add(new Commentaire(idCommentaire, contenu, date,idRencontre));
+		}
+		return list;
 	}
 	
-	public static boolean modifierCommentaire(int id) throws ClassNotFoundException, SQLException
+	public static boolean modifierCommentaire(Commentaire commentaire) throws ClassNotFoundException, SQLException
 	{
 		return true;
 	}

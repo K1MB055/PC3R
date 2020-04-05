@@ -49,9 +49,24 @@ public class TraitementUtilisateur {
 		return false;
 	}
 	
-	public static boolean getProfil(int id) throws ClassNotFoundException, SQLException {
+	public static Utilisateur getProfil(int id) throws ClassNotFoundException, SQLException {
+		String nom = null;
+		String prenom = null;
+		String email = null;
+		String mdp = null;
+		Connection cn = null;
+		Statement st = null;
 		String sql = "Select * from user where id= " + id;
-		return true;
+		cn = ConnectionLV.getConnection();
+		st = cn.createStatement();
+		ResultSet rs = st.executeQuery(sql);
+		while (rs.next()) {
+			 nom = rs.getString("nom");
+			 prenom = rs.getString("prenom");
+			 email = rs.getString("email");
+			 mdp = "******";
+		}
+		return new Utilisateur (id,nom,prenom,email,mdp);
 	}
 	
 	public static boolean modifierProfil(int id) throws ClassNotFoundException, SQLException {

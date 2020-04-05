@@ -19,39 +19,71 @@ import modele.Utilisateur;
 @WebServlet("/UtilisateurServlet")
 public class UtilisateurServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public UtilisateurServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	public UtilisateurServlet() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		if (request.getParameter("hidden").equals("authentification")) {
+			String email = request.getParameter("email");
+			String mdp = request.getParameter("mdp");
+			try {
+				boolean x = TraitementUtilisateur.authentification(email, mdp);
+				PrintWriter out = response.getWriter();
+				response.setContentType("text/html");
+				if (x) {
+					out.println("<html> <body> <h1> Authentification réussie </h1> </body> </html>");
+				} else {
+					out.println("<html> <body> <h1> Authentification échoué </h1> </body> </html>");
+				}
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else if (request.getParameter("hidden").equals("profil")) {
+			int id = Integer.parseInt(request.getParameter("id"));
+			try {
+				Utilisateur utilisateur = TraitementUtilisateur.getProfil(id);
+				PrintWriter out = response.getWriter();
+				response.setContentType("text/html");
+				out.println("<html> <body> <h1> profil :</h1>"
+						+ "<h2> profil :"+utilisateur.toString()+" </h2> </body> </html>");
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
-	
-	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		//récupérer les informations du profil a modifier
+		//appeler la methode TraitementUtilisateur.modifierProfil();
+	}
+
+	protected void doPut(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		Utilisateur utilisateur = new Utilisateur();
 		utilisateur.setNom(request.getParameter("nom"));
 		utilisateur.setPrenom(request.getParameter("prenom"));
 		utilisateur.setEmail(request.getParameter("email"));
 		utilisateur.setMdp(request.getParameter("mdp"));
-		
+
 		try {
 			boolean x = TraitementUtilisateur.ajouterUtilisateur(utilisateur);
 			PrintWriter out = response.getWriter();
@@ -65,11 +97,12 @@ public class UtilisateurServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-	
-	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		String email = request.getParameter("email");
-		
+
 		try {
 			boolean x = TraitementUtilisateur.supprimerUtilisateur(email);
 			PrintWriter out = response.getWriter();

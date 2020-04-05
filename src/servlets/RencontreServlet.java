@@ -31,16 +31,17 @@ public class RencontreServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//récupérer les informations de la recherche 
+		//récupérer la liste des rencontres résultat de l'appel à TraitementRencontre.recherche()
+		//affichage du résulat 
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		//recupérer les nouvelles information de la rencontre
+		//faire appelle à TraitementRencontre.mdofierRencontre() avec comme parametre les nouvelles infos
 	}
 	
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
