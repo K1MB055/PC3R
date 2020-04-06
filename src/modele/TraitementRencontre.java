@@ -12,7 +12,7 @@ public class TraitementRencontre {
 	public static boolean ajouterRencontre(Rencontre rencontre) throws ClassNotFoundException, SQLException {
 		Connection cn = null;
 		PreparedStatement st = null;
-		String sql = "INSERT INTO match values (null,?,?,?,?)";
+		String sql = "INSERT INTO rencontre values (null,?,?,?,?,?,?,?,?)";
 		cn = ConnectionLV.getConnection();
 		st = cn.prepareStatement(sql);
 		st.setString(1, rencontre.getCompetition());

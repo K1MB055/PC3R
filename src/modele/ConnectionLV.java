@@ -7,11 +7,11 @@ import com.mysql.jdbc.Connection;
 public class ConnectionLV {
 	
 	// URL de connexion
-	private String url = "jdbc:mysql://localhost/football";
+	private String url = "jdbc:mysql://localhost/pc3r_football";
 	// Nom du user
 	private String user = "root";
 	// Mot de passe de l'utilisateur
-	private String password = "anisanis";
+	private String password = "root";
 	// Objet Connection
 	private static Connection connect;
 
