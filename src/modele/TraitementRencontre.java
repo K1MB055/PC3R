@@ -1,6 +1,8 @@
 package modele;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -43,9 +45,31 @@ public class TraitementRencontre {
 		return true;
 	}
 	
-	public static ArrayList<Rencontre> rechercherRencontre() throws ClassNotFoundException, SQLException 
+	public static ArrayList<Rencontre> rechercherRencontre(String competition) throws ClassNotFoundException, SQLException 
 	{
-		return null;
+		Connection cn = null;
+		Statement st = null;
+		String sql = "Select * from Rencontre where true";
+		
+		if(competition!=null)
+		{
+			sql = sql + " and competition='"+competition+"'";
+		}
+		
+		ArrayList <Rencontre> rencontres = new ArrayList<Rencontre>();
+		Rencontre rencontre;
+		cn = ConnectionLV.getConnection();
+		st = cn.createStatement();
+		// executer la requête
+		ResultSet rs = st.executeQuery(sql);
+		while (rs.next()) {
+			rencontre = new Rencontre(rs.getInt("id"),rs.getString("competition"),rs.getString("tour"),
+					rs.getDate("date"),rs.getString("status"),rs.getString("homeTeam"),rs.getString("awayTeam")
+					,rs.getInt("scoreHomeTeam"),rs.getInt("scoreAwayTeam"));
+			rencontres.add(rencontre);
+		}
+		
+		return rencontres;
 	}
 	
 }

@@ -1,0 +1,144 @@
+@font-face {
+    font-family: 'Poppins';
+    src: url('../fonts/Poppins-Regular.ttf');
+    src: url('../fonts/Poppins-Regular.ttf') format('ttf');
+    src: url('../fonts/Poppins-Regular.ttf') format('truetype');
+}
+
+html, body{
+    height: 100%;
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+}
+.navbar-nav li{
+    padding-right: 10px;
+}
+.nav-link{
+    font-size: 1.1em;
+}
+footer{
+    background-color: #3f3f3f;
+    color: #d5d5d5;
+    padding-top: 2rem;
+}
+footer a, a:hover {
+    color: #d5d5d5;
+}
+hr.light{
+    border-top: 1px solid #d5d5d5;
+    width: 75%;
+    margin-top: .8rem;
+    margin-bottom: 1rem;
+}
+hr.light-100{
+    border-top: 1px solid #d5d5d5;
+    width: 88%;
+    margin-top: .8rem;
+    margin-bottom: 1rem;
+}
+#fixed{
+    background: url(../../img/players.jpg) no-repeat center center fixed;
+    display: table;
+    height: 60%;
+    position: relative;
+    width: 100%;
+    background-size: cover;
+}
+#fixed div{
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    transform: translateY(-50%);
+}
+#fixed h1{
+    color: white;
+    text-shadow: 1px 1px 10px black;
+}
+
+#login-dp{
+    width: 275px;
+    padding: 14px 14px 0;
+    overflow:hidden;
+    background-color:#f8f9fa;
+}
+#login-dp .help-block{
+    font-size:12px;   
+}
+#login-dp .form-group {
+    margin-bottom: 10px;
+}
+
+#login-dp .bottom{
+    width: 275px;
+    max-height: 50px;
+    background-color:rgba(255,255,255,.8);
+    border-top:1px solid #ddd;
+    clear:both;
+    padding:14px 15px;
+}
+#login-dp .bottom p{
+    text-align: left;
+    font-size: 18px;
+}
+#login-dp .btn-link{
+    padding:5px 0px;
+    text-decoration:none;
+    font-size: 18px;
+    border:none;
+    outline:none;
+    background:none;
+}
+#pl{
+    height: 120px;
+    width: 250px;
+}
+#fl1{
+    height: 180px;
+    width: 120px;
+}
+#bundesliga{
+    height: 120px;
+    width: 120px;
+}
+#liganos{
+    height: 130px;
+    width: 100px;
+}
+#laliga{
+    height: 135px;
+    width: 100px;
+}
+@media(max-width:576px){
+    #login-dp{
+        background-color: inherit;
+    }
+    #login-dp .bottom{
+        background-color: inherit;
+        border-top:0 none;
+    }
+}
+
+/*recherche*/
+.search{
+    padding-top: 50px;
+    width: 88%;
+    margin: auto;
+}
+.search form{
+    color: white;
+}
+##competition{
+    width: 170px;
+}
+#search-bg{
+    background: url(../../img/terrain.jpg) no-repeat center center;
+    background-color : green;
+    height: 65%;
+    position: relative;
+    width: 100%;
+    background-size: cover;
+}
+#search-bg .search form{
+    background-color: rgba(0, 0, 0, 0.20);
+    max-height: 200px;
+}

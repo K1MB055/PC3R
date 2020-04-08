@@ -3,6 +3,8 @@ package servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,9 +33,31 @@ public class RencontreServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//récupérer les informations de la recherche 
-		//récupérer la liste des rencontres résultat de l'appel à TraitementRencontre.recherche()
-		//affichage du résulat 
+		String competition = request.getParameter("competition");
+		try {
+			ArrayList<Rencontre> rencontres = TraitementRencontre.rechercherRencontre(competition);
+			PrintWriter out = response.getWriter();
+			response.setContentType("text/html");
+			if(rencontres.size() != 0){
+				String reponse = "<div class='list-group'>";
+				//affichage des 7 premiers resultats
+				for(int i= 0;i<=7;i++){
+					rencontres.get(i).getScoreHomeTeam();
+					rencontres.get(i).getScoreAwayTeam();
+				    reponse+="<a class='list-group-item list-group-item-action'>"
+				    +rencontres.get(i).getHomeTeam()+" "
+					+rencontres.get(i).getScoreHomeTeam()+" - "+rencontres.get(i).getScoreAwayTeam()
+					+" "+rencontres.get(i).getAwayTeam()+"</a>";
+				}
+				out.println(reponse+"</div>");
+			}else {
+				out.println("<h1> Aucune match trouvé </h1> ");
+			}
+			System.out.println("done");
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	/**

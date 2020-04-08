@@ -6,7 +6,6 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.sql.Date;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 

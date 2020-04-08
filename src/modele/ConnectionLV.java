@@ -11,7 +11,7 @@ public class ConnectionLV {
 	// Nom du user
 	private String user = "root";
 	// Mot de passe de l'utilisateur
-	private String password = "root";
+	private String password = "anisanis";
 	// Objet Connection
 	private static Connection connect;
 
