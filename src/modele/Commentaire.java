@@ -8,17 +8,19 @@ public class Commentaire {
 	String contenu;
 	Date date;
 	int idRencontre;
+	int idUser;
 
 	public Commentaire() {
 
 	}
 
-	public Commentaire(int id, String contenu, Date date,int idRencontre) {
+	public Commentaire(int id, String contenu, Date date,int idRencontre,int idUser) {
 		super();
 		this.id = id;
 		this.contenu = contenu;
 		this.date = date;
 		this.idRencontre = idRencontre;
+		this.idUser = idUser;
 	}
 
 	public int getId() {
@@ -52,5 +54,12 @@ public class Commentaire {
 	public void setIdRencontre(int idRencontre) {
 		this.idRencontre = idRencontre;
 	}
-	
+
+	public int getIdUser() {
+		return idUser;
+	}
+
+	public void setIdUser(int idUser) {
+		this.idUser = idUser;
+	}
 }

@@ -44,16 +44,16 @@ public class RencontreServlet extends HttpServlet {
 				for(int i= 0;i<=7;i++){
 					rencontres.get(i).getScoreHomeTeam();
 					rencontres.get(i).getScoreAwayTeam();
-				    reponse+="<a class='list-group-item list-group-item-action'>"
+				    reponse+="<a class='list-group-item list-group-item-action'"+ "id="+rencontres.get(i).getId() 
+					+" data-toggle='modal' data-target='#myModal'>"
 				    +rencontres.get(i).getHomeTeam()+" "
 					+rencontres.get(i).getScoreHomeTeam()+" - "+rencontres.get(i).getScoreAwayTeam()
 					+" "+rencontres.get(i).getAwayTeam()+"</a>";
 				}
 				out.println(reponse+"</div>");
 			}else {
-				out.println("<h1> Aucune match trouvé </h1> ");
+				out.println("<h1> Aucune match trouvé </h1>");
 			}
-			System.out.println("done");
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}

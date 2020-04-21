@@ -14,12 +14,13 @@ public class TraitementCommentaire {
 	public static boolean ajouterCommentaire(Commentaire commentaire) throws ClassNotFoundException, SQLException {
 		Connection cn = null;
 		PreparedStatement st = null;
-		String sql = "INSERT INTO comments values (null,?,?)";
+		String sql = "INSERT INTO comments values (null,?,?,?,?)";
 		cn = ConnectionLV.getConnection();
 		st = cn.prepareStatement(sql);
 		st.setString(1, commentaire.getContenu());
 		st.setDate(2, new java.sql.Date(commentaire.getDate().getTime()));
 		st.setInt(3, commentaire.getIdRencontre());
+		st.setInt(4, commentaire.getIdUser());
 		int count = st.executeUpdate();
 		return (count > 0);
 	}
@@ -41,6 +42,7 @@ public class TraitementCommentaire {
 		int idCommentaire = 0;
 		String contenu;
 		Date date;
+		int idUser;
 		//String pseudo = null;
 		ArrayList<Commentaire> list = new ArrayList<Commentaire>();
 		Connection cn = null;
@@ -51,17 +53,26 @@ public class TraitementCommentaire {
 		ResultSet rs = st.executeQuery(sql);
 		while (rs.next()) {
 			idCommentaire = rs.getInt("id");
-			//pseudo = rs.getString("pseudo_user");
 			contenu = rs.getString("contenu");
 			date = rs.getDate("date");
-			list.add(new Commentaire(idCommentaire, contenu, date,idRencontre));
+			idUser = rs.getInt("idUser");
+			list.add(new Commentaire(idCommentaire, contenu, date,idRencontre,idUser));
 		}
 		return list;
 	}
 	
 	public static boolean modifierCommentaire(Commentaire commentaire) throws ClassNotFoundException, SQLException
 	{
-		return true;
+		Connection cn = null;
+		PreparedStatement st = null;
+		
+		String sql = "UPDATE comments  SET contenu = ? WHERE id ="+commentaire.getId();
+		cn = ConnectionLV.getConnection();
+		st = cn.prepareStatement(sql);
+		st.setString(1,commentaire.getContenu());
+
+		int count = st.executeUpdate();
+		return (count > 0);
 	}
 	
 }

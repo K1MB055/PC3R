@@ -80,6 +80,9 @@ hr.light-100{
     text-align: left;
     font-size: 18px;
 }
+#profil{
+	font-size: 18px;	
+}
 #login-dp .btn-link{
     padding:5px 0px;
     text-decoration:none;
@@ -117,7 +120,10 @@ hr.light-100{
         border-top:0 none;
     }
 }
-
+.main {
+  width: 50%;
+  margin: 0 auto; 
+}
 /*recherche*/
 .search{
     padding-top: 50px;
@@ -138,7 +144,38 @@ hr.light-100{
     width: 100%;
     background-size: cover;
 }
-#search-bg .search form{
+#search-bg .search form {
     background-color: rgba(0, 0, 0, 0.20);
-    max-height: 200px;
+    max-height: 300px;
+}
+.hline {
+    margin: auto;
+    margin-bottom: 15px;
+    width:92%; 
+    height:1px;
+    background: #c6c6c6
+}
+.commentList {
+    list-style:none;
+    max-height:300px;
+    overflow:auto;
+}
+.commentList li {
+    margin-top:10px;
+}
+.commentList li > div {
+  	margin-left:5px;
+}
+#ajouter {
+	padding-right:30px;
+	padding-left:30px;
+}
+.sub-text {
+    color:#aaa;
+    font-family:verdana;
+    font-size:11px;
+}
+.actionBox {
+    border-top:1px dotted #bbb;
+    padding:10px;
 }

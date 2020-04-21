@@ -43,6 +43,7 @@ public class UtilisateurServlet extends HttpServlet {
 						session.setAttribute("email", email);
 						session.setAttribute("nom",utilisateur.getNom());
 						session.setAttribute("prenom", utilisateur.getPrenom());
+						session.setAttribute("id", utilisateur.getId());
 					} catch (ClassNotFoundException | SQLException e) {
 						e.printStackTrace();
 					}
@@ -57,15 +58,19 @@ public class UtilisateurServlet extends HttpServlet {
 			}
 		} else if (hidden.equals("checkEmail")){
 			String email = request.getParameter("email");
-			response.setContentType("text/plain");  
 		    response.setCharacterEncoding("UTF-8");
-		    boolean x;
-			try {
-				x = TraitementUtilisateur.verifierEmail(email);
-			    response.getWriter().print(String.valueOf(!x));
-			} catch (ClassNotFoundException | SQLException e) {
-				e.printStackTrace();
+			response.setContentType("text/plain"); 
+			if(email.equals(request.getSession(false).getAttribute("email"))){
+				response.getWriter().print("true");
 			}
+			else{
+				try {
+					boolean x = TraitementUtilisateur.verifierEmail(email);
+					response.getWriter().print(String.valueOf(!x));
+				} catch (ClassNotFoundException | SQLException e) {
+					e.printStackTrace();
+					}
+			}	
 		}
 		else if (hidden.equals("deconnexion")){
 			request.getSession().invalidate();
@@ -79,7 +84,42 @@ public class UtilisateurServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//récupérer les informations du profil a modifier
+		HttpSession session = request.getSession(false);
+		Utilisateur utilisateur = new Utilisateur();
+		utilisateur.setId((int) session.getAttribute("id"));
+		utilisateur.setEmail(request.getParameter("email"));
+		utilisateur.setNom(request.getParameter("nom"));
+		utilisateur.setPrenom(request.getParameter("prenom"));
+		utilisateur.setMdp(request.getParameter("mdp"));
+		try {
+			boolean x = TraitementUtilisateur.modifierProfil(utilisateur);
+			PrintWriter out = response.getWriter();
+			response.setContentType("text/html");
+			String reponse = "";
+			if(x){
+					reponse = "<div class='alert alert-success alert-dismissible'>"+
+							"<a href='#' class='close' data-dismiss='alert'"+
+								"aria-label='close'>&times;</a> "+
+								"<strong>Succés!</strong>	profil	mis a jour avec succés"+
+						 "</div>";
+					//mettre à jour les donnés stockés dans la session
+					session.setAttribute("nom", utilisateur.getNom());
+					session.setAttribute("prenom", utilisateur.getPrenom());
+					session.setAttribute("email", utilisateur.getEmail());
+			}
+			else{
+					reponse = "<div class='alert alert-danger alert-dismissible'>"+
+									"<a href='#' class='close' data-dismiss='alert'"+
+										"aria-label='close'>&times;</a> "+
+										"<strong>Echec!</strong>	Changement non enregistrer"+
+								 "</div>";
+			}
+			out.println(reponse);
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		//appeler la methode TraitementUtilisateur.modifierProfil();
 	}
 
@@ -98,9 +138,9 @@ public class UtilisateurServlet extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			response.setContentType("text/html");
 			if (x) {
-				out.println("<html> <body> <h1> Inscription réussie </h1> </body> </html>");
+				out.println("<h1> Inscription réussie </h1>");
 			} else {
-				out.println("<html> <body> <h1> Inscription échoué </h1> </body> </html>");
+				out.println("<h1> Inscription échoué </h1>");
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
