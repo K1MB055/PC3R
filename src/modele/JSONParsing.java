@@ -4,7 +4,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.text.Normalizer;
 import java.text.SimpleDateFormat;
 import java.sql.Date;
 import org.json.JSONArray;
@@ -13,13 +12,13 @@ import org.json.JSONObject;
 
 public class JSONParsing {
 	
-	public void updateDatabase() {
+	public static void updateDatabase() {
 		updateDatabaseWithURL("http://api.football-data.org/v2/competitions/FL1/matches");
 		updateDatabaseWithURL("http://api.football-data.org/v2/competitions/PL/matches");
 		updateDatabaseWithURL("http://api.football-data.org/v2/competitions/SA/matches");
 	}
 	
-	public void updateDatabaseWithURL(String apiUrl) {
+	public static void updateDatabaseWithURL(String apiUrl) {
 		
 		try
 		{
@@ -79,8 +78,21 @@ public class JSONParsing {
 						r.setScoreAwayTeam(new Integer(0));
 					}
 					
-					if(!TraitementRencontre.isRencontreAlreadyIn(r)) 
+					switch (TraitementRencontre.isRencontreAlreadyIn(r)) {
+					case Missing:
 						TraitementRencontre.ajouterRencontre(r);
+						System.out.println("MISSING");
+						break;
+					case NeedUpdate:
+						TraitementRencontre.modifierRencontre(r);
+						System.out.println("UPDATE");
+						break;
+					case AlreadyIn:
+						System.out.println("RIEN");
+						break;
+					default:
+						break;
+					}
 					
 					System.out.println(r.toString());
 				}
@@ -95,9 +107,8 @@ public class JSONParsing {
 		}
 	}
 
-	public static void main(String[] args) {
-		JSONParsing jp = new JSONParsing();
-		jp.updateDatabase();
-	}
+	/*public static void main(String[] args) {
+		JSONParsing.updateDatabase();
+	}*/
 	
 }

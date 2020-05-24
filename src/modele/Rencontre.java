@@ -112,14 +112,9 @@ public class Rencontre {
 	}
 	
 	public boolean equals(Rencontre r) {
-		boolean isEqual = competition.equals(r.getCompetition()) && tour.equals(r.getTour()) 
-				&& date.toLocalDate().equals(r.getDate().toLocalDate()) && status.equals(r.getStatus());
-		
-		if(status.equals("FINISHED") && r.getStatus().equals("FINISHED")) {
-			isEqual = isEqual && homeTeam.equals(r.getHomeTeam()) && awayTeam.equals(r.getAwayTeam())
-					&& ScoreHomeTeam.equals(r.getScoreHomeTeam()) && ScoreAwayTeam.equals(r.getScoreAwayTeam());
-		}
-		return isEqual;
+		return competition.equals(r.getCompetition()) && tour.equals(r.getTour()) 
+				&& date.toLocalDate().equals(r.getDate().toLocalDate()) 
+				&& homeTeam.equals(r.getHomeTeam()) && awayTeam.equals(r.getAwayTeam());
 	}
 
 }

@@ -9,7 +9,7 @@ public class CronJob implements Job{
 	@Override
 	public void execute(JobExecutionContext arg0) throws JobExecutionException {
 		System.out.print("Job en cours d'execution");
-		//JSONParsing.updateDatabaseWithURL();
+		JSONParsing.updateDatabase();
 	}
 
 }
