@@ -11,8 +11,8 @@ public class Rencontre {
 	String status; // Finished etc ...
 	String homeTeam;
 	String awayTeam;
-	int ScoreHomeTeam;
-	int ScoreAwayTeam;
+	Integer ScoreHomeTeam;
+	Integer ScoreAwayTeam;
 	// ArrayList<String> arbitres;
 
 	public Rencontre() {
@@ -88,7 +88,7 @@ public class Rencontre {
 		this.awayTeam = awayTeam;
 	}
 
-	public int getScoreHomeTeam() {
+	public Integer getScoreHomeTeam() {
 		return ScoreHomeTeam;
 	}
 
@@ -96,7 +96,7 @@ public class Rencontre {
 		ScoreHomeTeam = scoreHomeTeam;
 	}
 
-	public int getScoreAwayTeam() {
+	public Integer getScoreAwayTeam() {
 		return ScoreAwayTeam;
 	}
 
@@ -109,6 +109,17 @@ public class Rencontre {
 		return "Rencontre [id=" + id + ", competition=" + competition + ", tour=" + tour + ", date=" + date
 				+ ", status=" + status + ", homeTeam=" + homeTeam + ", awayTeam=" + awayTeam + ", ScoreHomeTeam="
 				+ ScoreHomeTeam + ", ScoreAwayTeam=" + ScoreAwayTeam + "]";
+	}
+	
+	public boolean equals(Rencontre r) {
+		boolean isEqual = competition.equals(r.getCompetition()) && tour.equals(r.getTour()) 
+				&& date.toLocalDate().equals(r.getDate().toLocalDate()) && status.equals(r.getStatus());
+		
+		if(status.equals("FINISHED") && r.getStatus().equals("FINISHED")) {
+			isEqual = isEqual && homeTeam.equals(r.getHomeTeam()) && awayTeam.equals(r.getAwayTeam())
+					&& ScoreHomeTeam.equals(r.getScoreHomeTeam()) && ScoreAwayTeam.equals(r.getScoreAwayTeam());
+		}
+		return isEqual;
 	}
 
 }

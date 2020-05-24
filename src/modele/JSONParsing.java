@@ -4,6 +4,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.text.Normalizer;
 import java.text.SimpleDateFormat;
 import java.sql.Date;
 import org.json.JSONArray;
@@ -13,10 +14,16 @@ import org.json.JSONObject;
 public class JSONParsing {
 	
 	public void updateDatabase() {
+		updateDatabaseWithURL("http://api.football-data.org/v2/competitions/FL1/matches");
+		updateDatabaseWithURL("http://api.football-data.org/v2/competitions/PL/matches");
+		updateDatabaseWithURL("http://api.football-data.org/v2/competitions/SA/matches");
+	}
+	
+	public void updateDatabaseWithURL(String apiUrl) {
 		
 		try
 		{
-			URL url = new URL("http://api.football-data.org/v2/competitions/FL1/matches");
+			URL url = new URL(apiUrl);
 			//Parse URL into HttpURLConnection in order to open the connection in order to get the JSON data
 			HttpURLConnection conn = (HttpURLConnection)url.openConnection();
 			//Set the request to GET or POST as per the requirements
@@ -67,9 +74,14 @@ public class JSONParsing {
 					{
 						r.setScoreHomeTeam(matches.getJSONObject(i).getJSONObject("score").getJSONObject("fullTime").getInt("homeTeam"));
 						r.setScoreAwayTeam(matches.getJSONObject(i).getJSONObject("score").getJSONObject("fullTime").getInt("awayTeam"));
+					} else {
+						r.setScoreHomeTeam(new Integer(0));
+						r.setScoreAwayTeam(new Integer(0));
 					}
 					
-					TraitementRencontre.ajouterRencontre(r);
+					if(!TraitementRencontre.isRencontreAlreadyIn(r)) 
+						TraitementRencontre.ajouterRencontre(r);
+					
 					System.out.println(r.toString());
 				}
 			}
@@ -82,4 +94,10 @@ public class JSONParsing {
 			e.printStackTrace();
 		}
 	}
+
+	public static void main(String[] args) {
+		JSONParsing jp = new JSONParsing();
+		jp.updateDatabase();
+	}
+	
 }

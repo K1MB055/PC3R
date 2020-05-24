@@ -124,7 +124,7 @@
 					</div>
 						<div class="actionBox">
 							<c:if test="${sessionScope.connected=='true'}">
-								<h3 align='center'>section commentaires </h3>             
+								<h3 align='center'>Section commentaires </h3>             
 								<ul class="commentList">							
 								</ul>
 								<form  role="form">
@@ -134,13 +134,13 @@
 											 placeholder="Votre commentaire" />
 										</div>
 										<div class="col-auto">
-										<button class="btn btn-primary" id='ajouter'>ajouter</button>
+										<button class="btn btn-primary" id='ajouter'>Ajouter</button>
 										</div>
 									</div>
 								</form>
 							</c:if>
 							<c:if test="${sessionScope.connected!='true'}">
-	                    		<h4 align='center'>il faut être connecté pour acceder à la section commentaire </h4>
+	                    		<h4 align='center'>Il faut être connecté pour acceder à la section commentaire </h4>
 	                		</c:if>
 						</div>			
 				</div>

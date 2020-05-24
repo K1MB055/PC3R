@@ -16,7 +16,7 @@
     </head>
     <body>
         <c:if test="${sessionScope.connected!='true'}">
-                <c:redirect url="authentification.html"></c:redirect>
+                <c:redirect url="authentification.jsp"></c:redirect>
         </c:if>
         
 		<!--Navigation-->
@@ -116,7 +116,7 @@
 									<div class="col-md-12">
 										<input type="submit" class="btn btn-primary"
 											value="Enregistrer"> <span></span> <a
-											href="http://localhost:8080/Football/profil.jsp"
+											href="http://localhost:8080/Football/index.jsp"
 											class="btn btn-default">Annuler</a>
 									</div>
 								</div>
