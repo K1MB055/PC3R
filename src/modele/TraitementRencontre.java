@@ -155,7 +155,7 @@ public class TraitementRencontre {
 					
 		}
 		
-		if (compteur == 1) return EtatRencontre.AlreadyIn;
+		if (compteur >= 1) return EtatRencontre.AlreadyIn;
 		
 		return EtatRencontre.Missing;
 		
