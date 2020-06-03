@@ -2,6 +2,8 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
 import java.util.Map;
 import javax.servlet.ServletException;
@@ -52,7 +54,7 @@ public class UtilisateurServlet extends HttpServlet {
 				} else {
 					response.getWriter().print("Identifiants incorrectes");
 				}
-			} catch (ClassNotFoundException | SQLException e) {
+			} catch (ClassNotFoundException | SQLException | NoSuchAlgorithmException | InvalidKeySpecException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -115,7 +117,7 @@ public class UtilisateurServlet extends HttpServlet {
 								 "</div>";
 			}
 			out.println(reponse);
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (ClassNotFoundException | SQLException | NoSuchAlgorithmException | InvalidKeySpecException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -132,7 +134,7 @@ public class UtilisateurServlet extends HttpServlet {
 		utilisateur.setPrenom(data.get("prenom"));
 		utilisateur.setEmail(data.get("email").replaceAll("%40","@").toLowerCase());
 		utilisateur.setMdp(data.get("mdp"));
-		System.out.println(data.toString());
+		
 		try {
 			boolean x = TraitementUtilisateur.ajouterUtilisateur(utilisateur);
 			PrintWriter out = response.getWriter();
@@ -142,7 +144,7 @@ public class UtilisateurServlet extends HttpServlet {
 			} else {
 				out.println("<h1> Inscription échoué </h1>");
 			}
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (ClassNotFoundException | SQLException | NoSuchAlgorithmException | InvalidKeySpecException e) {
 			e.printStackTrace();
 		}
 	}

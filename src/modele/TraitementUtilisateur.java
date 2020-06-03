@@ -4,12 +4,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 
 import com.mysql.jdbc.Connection;
 
 public class TraitementUtilisateur {
 	
-	public static boolean ajouterUtilisateur(Utilisateur utilisateur) throws ClassNotFoundException, SQLException {
+	public static boolean ajouterUtilisateur(Utilisateur utilisateur) throws ClassNotFoundException, SQLException, NoSuchAlgorithmException, InvalidKeySpecException {
 		Connection cn = null;
 		PreparedStatement st = null;
 		String sql = "INSERT INTO user values (null,?,?,?,?)";
@@ -18,7 +20,7 @@ public class TraitementUtilisateur {
 		st.setString(1, utilisateur.getNom());
 		st.setString(2, utilisateur.getPrenom());
 		st.setString(3, utilisateur.getEmail());
-		st.setString(4, utilisateur.getMdp());
+		st.setString(4, PasswordHashing.generatePasswordHash(utilisateur.getMdp()));
 		int count = st.executeUpdate();
 		return (count > 0);
 	}
@@ -34,19 +36,20 @@ public class TraitementUtilisateur {
 		return (count > 0);
 	}
 	
-	public static boolean authentification(String email, String mdp) throws ClassNotFoundException, SQLException {
+	public static boolean authentification(String email, String password) throws ClassNotFoundException, SQLException, NoSuchAlgorithmException, InvalidKeySpecException {
 		Connection cn = null;
 		PreparedStatement st = null;
-		String sql = "Select * from user where email= ? and mdp= ? ";
+		String storedPassword = null;
+		String sql = "Select * from user where email= ?";
 		cn = ConnectionLV.getConnection();
 		st = cn.prepareStatement(sql);
 		st.setString(1, email);
-		st.setString(2, mdp);
 		ResultSet rs = st.executeQuery();
 		while (rs.next()) {
-	    return true;
+			storedPassword = rs.getString("mdp");
 		}
-		return false;
+		
+		return PasswordHashing.validatePassword(password, storedPassword);
 	}
 	
 	public static Utilisateur getProfil(String email) throws ClassNotFoundException, SQLException {
@@ -89,7 +92,7 @@ public class TraitementUtilisateur {
 		return new Utilisateur (id,nom,prenom,email,mdp);
 	}
 	
-	public static boolean modifierProfil(Utilisateur utilisateur) throws ClassNotFoundException, SQLException {
+	public static boolean modifierProfil(Utilisateur utilisateur) throws ClassNotFoundException, SQLException, NoSuchAlgorithmException, InvalidKeySpecException {
 		Connection cn = null;
 		PreparedStatement st = null;
 		String x ="";
@@ -106,7 +109,7 @@ public class TraitementUtilisateur {
 		st.setString(3, utilisateur.getEmail());
 		if(!utilisateur.getMdp().equals(""))
 		{
-			st.setString(4, utilisateur.getMdp());
+			st.setString(4, PasswordHashing.generatePasswordHash(utilisateur.getMdp()));
 		}
 		
 		int count = st.executeUpdate();
@@ -126,4 +129,5 @@ public class TraitementUtilisateur {
 		}
 		return false;
 	}
+	
 }
