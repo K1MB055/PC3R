@@ -95,13 +95,16 @@
 			<div class="container">
 				<div class="search text-center">
 					<form id="idForm" class="rounded">
-						<div class="row p-3 justify-content-around">
+						<div class="row p-3 justify-content-around inline">
 						<span class=" col-xm-12 col-md-3"> 
 						<select	class="custom-select" name="competition" id="competition">
 								<option selected disabled>Compétition</option>
 								<option value='Premier League'>Premier League</option>
 								<option value='Ligue 1'>Ligue 1</option>
 								<option value='Serie A'>Serie A</option>
+						</select>
+						<select	class="custom-select" name="tour" id="tour">
+								<option selected disabled>Journée</option>
 						</select>
 						</span>
 						</div>
@@ -222,7 +225,14 @@
 			</div>
 		</footer>
 		<script>
-			$(document).ready(function(){			  
+			$(document).ready(function(){
+				
+				  // remplir le select de journée avec les valeurs allons de 1 - 38.
+				  var $select = $("#tour");
+			      for (i=1;i<=38;i++){
+			          $select.append($('<option></option>').val(i).html(i))
+			      }
+			      
 				  $("#rechercher").click(function(e){
 				     e.preventDefault();
 				     $.ajax({

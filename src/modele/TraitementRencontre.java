@@ -11,7 +11,7 @@ import com.mysql.jdbc.Connection;
 public class TraitementRencontre {
 	
 	/**
-	 * Ajoute une rencontre à la base
+	 * Ajoute une rencontre ï¿½ la base
 	 * @return False si erreur
 	 */
 	public static boolean ajouterRencontre(Rencontre rencontre) throws ClassNotFoundException, SQLException {
@@ -84,10 +84,11 @@ public class TraitementRencontre {
 	}
 	
 	/**
-	 * Recherche toutes les rencontres d'une compétition
-	 * @return la liste des compétitions
+	 * Recherche toutes les rencontres d'une compï¿½tition
+	 * @param tour 
+	 * @return la liste des compï¿½titions
 	 */
-	public static ArrayList<Rencontre> rechercherRencontre(String competition) throws ClassNotFoundException, SQLException 
+	public static ArrayList<Rencontre> rechercherRencontre(String competition, String tour) throws ClassNotFoundException, SQLException 
 	{
 		Connection cn = null;
 		Statement st = null;
@@ -96,6 +97,10 @@ public class TraitementRencontre {
 		if(competition!=null)
 		{
 			sql = sql + " and competition='"+competition+"'";
+		}
+		if(tour!=null)
+		{
+			sql = sql + " and tour='"+tour+"'";
 		}
 		
 		ArrayList <Rencontre> rencontres = new ArrayList<Rencontre>();
@@ -115,8 +120,8 @@ public class TraitementRencontre {
 	}
 	
 	/**
-	 * Détermine si une rencontre est déjà dans la bas où non
-	 * @return True si elle est déjà dans la base, False sinon
+	 * Dï¿½termine si une rencontre est dï¿½jï¿½ dans la bas oï¿½ non
+	 * @return True si elle est dï¿½jï¿½ dans la base, False sinon
 	 */
 	public static EtatRencontre isRencontreAlreadyIn(Rencontre rencontre) 
 			throws ClassNotFoundException, SQLException {
@@ -162,9 +167,9 @@ public class TraitementRencontre {
 	}
 	
 	/**
-	 * Détermine si une rencontre a besoin d'une mise à jour
-	 * Dans le cas où son status a changé ou si elle est en cours
-	 * @return True si une mise à jour est nécessaire
+	 * Dï¿½termine si une rencontre a besoin d'une mise ï¿½ jour
+	 * Dans le cas oï¿½ son status a changï¿½ ou si elle est en cours
+	 * @return True si une mise ï¿½ jour est nï¿½cessaire
 	 */
 	public static boolean needUpdate(Rencontre oldRencontre, Rencontre newRencontre) {
 		

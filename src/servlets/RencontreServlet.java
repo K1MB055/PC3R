@@ -34,21 +34,23 @@ public class RencontreServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String competition = request.getParameter("competition");
+		String tour = request.getParameter("tour");
 		try {
-			ArrayList<Rencontre> rencontres = TraitementRencontre.rechercherRencontre(competition);
+			ArrayList<Rencontre> rencontres = TraitementRencontre.rechercherRencontre(competition,tour);
 			PrintWriter out = response.getWriter();
 			response.setContentType("text/html");
 			if(rencontres.size() != 0){
 				String reponse = "<div class='list-group'>";
-				//affichage des 7 premiers resultats
-				for(int i= 0;i<=7;i++){
+				for(int i= 0;i<rencontres.size();i++){
 					rencontres.get(i).getScoreHomeTeam();
 					rencontres.get(i).getScoreAwayTeam();
 				    reponse+="<a class='list-group-item list-group-item-action'"+ "id="+rencontres.get(i).getId() 
 					+" data-toggle='modal' data-target='#myModal'>"
 				    +rencontres.get(i).getHomeTeam()+" "
 					+rencontres.get(i).getScoreHomeTeam()+" - "+rencontres.get(i).getScoreAwayTeam()
-					+" "+rencontres.get(i).getAwayTeam()+"</a>";
+					+" "+rencontres.get(i).getAwayTeam()
+					+"  (journée "+rencontres.get(i).getTour()+" - "
+					+rencontres.get(i).getCompetition()+")</a>";
 				}
 				out.println(reponse+"</div>");
 			}else {

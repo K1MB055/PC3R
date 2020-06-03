@@ -6,7 +6,7 @@ public class Rencontre {
 
 	int id;
 	String competition;
-	String tour; // journée pour le championnat et tour pour compet comme la ldc
+	String tour; // journée pour le championnat
 	Date date;
 	String status; // Finished etc ...
 	String homeTeam;
