@@ -57,7 +57,6 @@
 								</div>
 							</div>
 						</li>
-						<li class="nav-item "><a class="nav-link" href="http://localhost:8080/Football/standings.jsp">Standings</a></li>
 						<li class="nav-item"><a class="nav-link" href="http://localhost:8080/Football/conditions.html">Conditions générales</a></li>
 					</ul>
 				</div>

@@ -16,6 +16,9 @@ public class JSONParsing {
 		updateDatabaseWithURL("http://api.football-data.org/v2/competitions/FL1/matches");
 		updateDatabaseWithURL("http://api.football-data.org/v2/competitions/PL/matches");
 		updateDatabaseWithURL("http://api.football-data.org/v2/competitions/SA/matches");
+		updateDatabaseWithURL("http://api.football-data.org/v2/competitions/BL1/matches");
+		updateDatabaseWithURL("http://api.football-data.org/v2/competitions/PPL/matches");
+		updateDatabaseWithURL("http://api.football-data.org/v2/competitions/PD/matches");
 	}
 	
 	public static void updateDatabaseWithURL(String apiUrl) {

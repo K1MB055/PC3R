@@ -5,7 +5,7 @@
 
 <html>
 <head>
-<title>Conditions d'utilisations</title>
+<title>Authentification</title>
 <link rel="shortcut icon" type="img/png"
 	href="http://localhost:8080/Football/img/flavicon.png">
 <link rel="stylesheet" href="style/bootstrap/css/bootstrap.min.css">

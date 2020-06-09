@@ -84,7 +84,6 @@
 								</div>
 							</div>
 						</li>
-						<li class="nav-item "><a class="nav-link" href="http://localhost:8080/Football/standings.jsp">Standings</a></li>
 						<li class="nav-item"><a class="nav-link" href="http://localhost:8080/Football/conditions.html">Conditions générales</a></li>
 					</ul>
 				</div>
@@ -102,6 +101,9 @@
 								<option value='Premier League'>Premier League</option>
 								<option value='Ligue 1'>Ligue 1</option>
 								<option value='Serie A'>Serie A</option>
+								<option value='Bundesliga'>Bundesliga</option>
+								<option value='Primera Division'>La Liga</option>
+								<option value='Primeira Liga'>Liga NOS</option>
 						</select>
 						<select	class="custom-select" name="tour" id="tour">
 								<option selected disabled>Journée</option>
@@ -192,11 +194,9 @@
 		<div id="fixed">
 			<div class="container">
 				<h1>
-					<b>Voir le classement des plus grands championnats <br>
+					<b>Intéragir autour des scores des plus grands championnats <br>
 					</b>
 				</h1>
-				<br> <a href="http://localhost:8080/Football/standings.jsp"><button type="button"
-						class="btn btn-primary btn-lg">Standings</button></a>
 			</div>
 		</div>
 		<!--Footer-->

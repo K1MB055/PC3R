@@ -49,6 +49,7 @@ public class TraitementUtilisateur {
 			storedPassword = rs.getString("mdp");
 		}
 		
+		if(storedPassword == null ) return false;
 		return PasswordHashing.validatePassword(password, storedPassword);
 	}
 	

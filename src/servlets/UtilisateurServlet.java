@@ -52,7 +52,7 @@ public class UtilisateurServlet extends HttpServlet {
 					session.setAttribute("connected", "true");
 					response.sendRedirect(request.getContextPath() + "/index.jsp");
 				} else {
-					response.getWriter().print("Identifiants incorrectes");
+					response.sendRedirect(request.getContextPath() + "/authentification.jsp");
 				}
 			} catch (ClassNotFoundException | SQLException | NoSuchAlgorithmException | InvalidKeySpecException e) {
 				// TODO Auto-generated catch block
