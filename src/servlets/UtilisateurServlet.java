@@ -140,9 +140,9 @@ public class UtilisateurServlet extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			response.setContentType("text/html");
 			if (x) {
-				out.println("<h1> Inscription réussie </h1>");
+				out.println("<h1 align='center'> Inscription réussie </h1>");
 			} else {
-				out.println("<h1> Inscription échoué </h1>");
+				out.println("<h1 align='center'> Inscription échoué </h1>");
 			}
 		} catch (ClassNotFoundException | SQLException | NoSuchAlgorithmException | InvalidKeySpecException e) {
 			e.printStackTrace();
